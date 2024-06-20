@@ -4,14 +4,10 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "start": "nodemon --watch './**/*.ts' --exec 'ts-node' ./server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack --watch --config webpack.config.js",
-    "compile": "tsc",
+    "start": "node ./dist/server.js",
     "watch:build": "webpack --watch",
     "watch:server": "nodemon \"./dist/server.js\" --watch \"./dist\"",
-    "startAll": "npm-run-all watch:build watch:server",
-    "startAllCompile": "npm-run-all compile watch:build watch:server"
+    "dev": "npm-run-all watch:build watch:server"
   },
   "author": "tsiresyrabekoto@gmail.com",
   "license": "ISC",
