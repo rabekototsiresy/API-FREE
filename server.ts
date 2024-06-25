@@ -42,19 +42,6 @@ app.use("/api/v1", AppRoute);
 app.route("/").get((req: Request, res: Response, next: NextFunction) => res.sendStatus(200));
 
 /**
- * Notification socket io
- */
-// io.on('connection', (socket) => {
-//   socket.on('run_process',  async data => {
-//     console.log("run process")
-//       await getPliController(socket,data)
-   
-//   })
-
-// });
-
-
-/**
  * passport config
  */
 
@@ -64,7 +51,7 @@ JwtAuth().catch(err => {
 
 dbInstance.authenticate()
 .then(async () => {
-  await dbInstance.sync({ alter: false });
+  await dbInstance.sync({ alter: true });
   console.log(`► ${config.dbDialect}: connected .....☪☻✔️`);
 })
 .catch((e: any) => console.log(`${config.dbDialect} : Not connected ️❌️`, e));
