@@ -69,7 +69,7 @@ app.all("/**", (req: Request, res: Response) =>
 app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
 
   console.log(err)
-  return ApiResponse(res,SERVER_ERROR_CODE_500,false, "Server error"+err)
+  return ApiResponse(res,SERVER_ERROR_CODE_500,false, "Oops something went wrong"+err)
 });
 // app.use(errorHandler);
 /**

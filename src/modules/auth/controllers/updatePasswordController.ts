@@ -19,7 +19,7 @@ export const updatePasswordController  = async (
     return ApiResponse(res,SUCCESS_CODE_200,true, "Password updated successful")
 
   } catch (error) {
-    return ApiResponse(res,SERVER_ERROR_CODE_500,false, "Update failed",error)
+    return ApiResponse(res,SERVER_ERROR_CODE_500,false, "Update failed")
     
   }
 };

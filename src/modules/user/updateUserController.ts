@@ -20,7 +20,7 @@ export const updateUserController  = async (
     const user:any = await UserModel.update(userBody,{where: {id}})
     return ApiResponse(res,CREATED_CODE_201,true, "User updated successful", user)
   } catch (error) {
-    return ApiResponse(res,SERVER_ERROR_CODE_500,false, "Registration failed",error)
+    return ApiResponse(res,SERVER_ERROR_CODE_500,false, "Registration failed")
     
   }
 };

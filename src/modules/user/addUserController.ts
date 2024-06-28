@@ -20,7 +20,7 @@ export const addUserController = async (
 
   } catch (error) {
 console.log(error,'errrorrr')
-    return ApiResponse(res,SERVER_ERROR_CODE_500,false, "Registration failed",error)
+    return ApiResponse(res,SERVER_ERROR_CODE_500,false, "Registration failed")
     
   }
 };

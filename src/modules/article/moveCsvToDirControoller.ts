@@ -26,7 +26,7 @@ export const moveCsvToDirControoller  = async (
 
     return ApiResponse(res, CREATED_CODE_201, true, "csv moved successfully",articlesList);
   } catch (error) {
-    return ApiResponse(res,SERVER_ERROR_CODE_500,false, "csv failed",error)
+    return ApiResponse(res,SERVER_ERROR_CODE_500,false, "csv failed")
     
   }
 };

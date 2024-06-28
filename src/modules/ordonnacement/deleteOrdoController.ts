@@ -1,25 +1,21 @@
 import { NextFunction, Request, Response } from "express";
 import { ApiResponse } from "common/helpers/ApiResponse";
 import { NOT_FOUND_CODE_404, SERVER_ERROR_CODE_500, SUCCESS_CODE_200 } from "common/constants/HTTP_CODE";
-import { UserModel } from "../../../server";
+import { OrdonnancementModel } from "../../../server";
 
 
 
-export const deleteUserController = async (
+export const deleteOrdoController = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    /**
-     * send request to planetpress
-     */
-
     const { id  } = req.params;
-    const user = await UserModel.findByPk(id);
-    if (!user) return ApiResponse(res,NOT_FOUND_CODE_404,false, "profile not found");
-    await UserModel.destroy({where: {id}});
-    return ApiResponse(res,SUCCESS_CODE_200,true,"uSER removed successfully id: "+id);
+    const ordonnacement = await OrdonnancementModel.findByPk(id);
+    if (!ordonnacement) return ApiResponse(res,NOT_FOUND_CODE_404,false, "ordonnacement not found");
+    await OrdonnancementModel.destroy({where: {id}});
+    return ApiResponse(res,SUCCESS_CODE_200,true,"ordonnacement removed successfully id: "+id);
   } catch (error) {
     return ApiResponse(res,SERVER_ERROR_CODE_500,false, "Oops something went wrong")
 

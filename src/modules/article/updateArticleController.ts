@@ -18,7 +18,7 @@ export const updateArticleController  = async (
     const user:any = await ArticleConfigModel.update(articleBody,{where: {id}})
     return ApiResponse(res,CREATED_CODE_201,true, "article updated successful")
   } catch (error) {
-    return ApiResponse(res,SERVER_ERROR_CODE_500,false, "article updated failed",error)
+    return ApiResponse(res,SERVER_ERROR_CODE_500,false, "article updated failed")
     
   }
 };

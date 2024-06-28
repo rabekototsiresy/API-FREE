@@ -15,7 +15,7 @@ export const getAllArticleController = async (
     return ApiResponse(res,SUCCESS_CODE_200,true,"List of all articles",articlesList);
     
   } catch (error) {
-    return ApiResponse(res,SERVER_ERROR_CODE_500,false, "Server error")
+    return ApiResponse(res,SERVER_ERROR_CODE_500,false, "Oops something went wrong")
 
   }
 

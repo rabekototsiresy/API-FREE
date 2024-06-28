@@ -26,7 +26,7 @@ export const loginController = async (
     return ApiResponse(res,SUCCESS_CODE_200,true,"connected successfully",data);
     
   } catch (error) {
-    return ApiResponse(res,SERVER_ERROR_CODE_500,false, "Server error")
+    return ApiResponse(res,SERVER_ERROR_CODE_500,false, "Oops something went wrong")
 
   }
 
