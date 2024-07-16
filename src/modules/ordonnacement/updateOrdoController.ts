@@ -1,7 +1,7 @@
 import { NextFunction, Request,Response } from "express";
 import { ApiResponse } from "common/helpers/ApiResponse";
 import { CREATED_CODE_201, NOT_FOUND_CODE_404, SERVER_ERROR_CODE_500 } from "common/constants/HTTP_CODE";
-import { OrdonnancementModel } from "../../../server";
+import { OrdonnancementModel } from "common/models/OrdonnancementModel";
 
 export const updateOrdoController  = async (
   req: Request,

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { ApiResponse } from "common/helpers/ApiResponse";
 import { SERVER_ERROR_CODE_500, SUCCESS_CODE_200 } from "common/constants/HTTP_CODE";
-import { ArticleConfigModel } from "../../../server";
+import {ArticleConfigModel} from "../../common/models/ArticleConfigModel";
 
 
 
@@ -11,7 +11,7 @@ export const getAllArticleController = async (
   next: NextFunction
 ) => {
   try {
-    const articlesList = await ArticleConfigModel.findAll()
+    const articlesList = await ArticleConfigModel.findAll();
     return ApiResponse(res,SUCCESS_CODE_200,true,"List of all articles",articlesList);
     
   } catch (error) {

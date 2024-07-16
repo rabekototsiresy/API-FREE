@@ -51,7 +51,7 @@ JwtAuth().catch(err => {
 
 dbInstance.authenticate()
 .then(async () => {
-  await dbInstance.sync({ alter: true });
+  await dbInstance.sync({ alter: false });
   console.log(`► ${config.dbDialect}: connected .....☪☻✔️`);
 })
 .catch((e: any) => console.log(`${config.dbDialect} : Not connected ️❌️`, e));
@@ -69,7 +69,7 @@ app.all("/**", (req: Request, res: Response) =>
 app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
 
   console.log(err)
-  return ApiResponse(res,SERVER_ERROR_CODE_500,false, "Oops something went wrong"+err)
+  return ApiResponse(res,SERVER_ERROR_CODE_500,false, "Oops something went wrong:"+err)
 });
 // app.use(errorHandler);
 /**

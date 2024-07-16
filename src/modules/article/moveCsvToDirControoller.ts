@@ -1,10 +1,10 @@
 import { NextFunction, Request,Response } from "express";
 import { ApiResponse } from "common/helpers/ApiResponse";
 import { CREATED_CODE_201, NOT_FOUND_CODE_404, SERVER_ERROR_CODE_500 } from "common/constants/HTTP_CODE";
-import { ArticleConfigModel } from "../../../server";
 import { json2csv } from 'json-2-csv';
 import * as fs from 'fs';
 import * as path from 'path';
+import {ArticleConfigModel} from "../../common/models/ArticleConfigModel";
 
 
 export const moveCsvToDirControoller  = async (

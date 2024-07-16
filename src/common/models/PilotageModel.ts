@@ -1,22 +1,21 @@
 import { dbInstance } from "common/services/DBService";
 import { DataTypes } from "sequelize";
-export const OrdonnancementModel = dbInstance.define("ordonnancement", {
+import {FileModel} from "./FileModel";
+export const PilotageModel = dbInstance.define("pilotage", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
-  typeDocument: {
+  status: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  priority: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  jour_retention: {
-    type: DataTypes.INTEGER,
+  filename: {
+    type: DataTypes.STRING,
     allowNull: false,
   },
 });
 
+PilotageModel.hasMany(FileModel);
+FileModel.belongsTo(PilotageModel);

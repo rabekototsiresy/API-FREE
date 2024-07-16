@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { ApiResponse } from "common/helpers/ApiResponse";
 import { NOT_FOUND_CODE_404, SERVER_ERROR_CODE_500, SUCCESS_CODE_200 } from "common/constants/HTTP_CODE";
-import { OrdonnancementModel } from "../../../server";
+import { OrdonnancementModel } from "common/models/OrdonnancementModel";
 
 
 

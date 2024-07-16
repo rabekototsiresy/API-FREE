@@ -1,7 +1,7 @@
 import { NextFunction, Request,Response } from "express";
 import { ApiResponse } from "common/helpers/ApiResponse";
 import {  CREATED_CODE_201, SERVER_ERROR_CODE_500 } from "common/constants/HTTP_CODE";
-import { OrdonnancementModel } from "../../../server";
+import { OrdonnancementModel } from "common/models/OrdonnancementModel";
 
 export const addOrdoController = async (
   req: Request,
@@ -15,6 +15,5 @@ export const addOrdoController = async (
 
   } catch (error) {
     return ApiResponse(res,SERVER_ERROR_CODE_500,false, "Add ordonnacement failed")
-    
   }
 };
