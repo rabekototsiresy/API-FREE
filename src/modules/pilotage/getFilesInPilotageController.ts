@@ -1,41 +1,48 @@
 import { NextFunction, Request, Response } from "express";
 import { ApiResponse } from "common/helpers/ApiResponse";
-import { NOT_FOUND_CODE_404, SERVER_ERROR_CODE_500, SUCCESS_CODE_200 } from "common/constants/HTTP_CODE";
+import {
+  NOT_FOUND_CODE_404,
+  SERVER_ERROR_CODE_500,
+  SUCCESS_CODE_200,
+} from "common/constants/HTTP_CODE";
 import { FileModel } from "common/models/FileModel";
 
-
-
-export const getFilesInPilotageController  = async (
+export const getFilesInPilotageController = async (
   req: Request,
   res: Response,
   _next: NextFunction
 ) => {
   try {
-    const { id } = req.params
-    const pageAsNumber  = Number.parseInt((req.query as any).page);
-    const sizeAsNumber  = Number.parseInt((req.query as any).size);
-    
-    let page = 0
-    
-    if(!Number.isNaN(pageAsNumber) && pageAsNumber > 0) {
+    const { id } = req.params;
+    const pageAsNumber = Number.parseInt((req.query as any).page);
+    const sizeAsNumber = Number.parseInt((req.query as any).size);
+
+    let page = 0;
+
+    if (!Number.isNaN(pageAsNumber) && pageAsNumber > 0) {
       page = pageAsNumber;
     }
     let size = 5;
-    if(!Number.isNaN(sizeAsNumber)) {
-    
+    if (!Number.isNaN(sizeAsNumber)) {
       size = sizeAsNumber;
-    
     }
-    if(!id) return ApiResponse(res,NOT_FOUND_CODE_404,false, "Id missing")
-    const filesList = await FileModel.findAndCountAll({where: {pilotageId: id},
-      limit: size,
-      offset: page * size
-    })
-    return ApiResponse(res,SUCCESS_CODE_200,true,"List of all pilotage",{records: filesList.rows,count: filesList.count});
-
+    if (!id) return ApiResponse(res, NOT_FOUND_CODE_404, false, "Id missing");
+    const filesList = await FileModel.findAndCountAll({
+      where: { pilotageId: id },
+      // limit: size,
+      // offset: page * size
+    });
+    return ApiResponse(res, SUCCESS_CODE_200, true, "List of all pilotage", {
+      records: filesList.rows,
+      count: filesList.count,
+    });
   } catch (error) {
-    return ApiResponse(res,SERVER_ERROR_CODE_500,false, "Oops something went wrong")
-
+    console.log(error);
+    return ApiResponse(
+      res,
+      SERVER_ERROR_CODE_500,
+      false,
+      "Oops something went wrong"
+    );
   }
-
 };

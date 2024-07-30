@@ -2,6 +2,7 @@ import { Router } from "express";
 import passport from "passport";
 import { getPilotageController } from "./getPilotageController";
 import { getFilesInPilotageController } from "./getFilesInPilotageController";
+import { updateStatusController } from "./updateStatusController";
 
 export const PilotageRoute: Router = Router();
 
@@ -15,4 +16,7 @@ PilotageRoute.route("/files/:id").get(
   getFilesInPilotageController
 );
 
-
+PilotageRoute.route("/files/change-status").put(
+  passport.authenticate("jwt", { session: false }),
+  updateStatusController
+);

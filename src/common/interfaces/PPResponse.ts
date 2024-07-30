@@ -1,6 +1,5 @@
-export interface PPResponse {
-  status: String;
-  numdoc: number;
-  numpage: number;
-  uid: string;
+export interface PPResponse<T=any> {
+  result: string;
+  message: string;
+  data?: T|any
 }
