@@ -5,6 +5,8 @@ import {
   SUCCESS_CODE_200,
 } from "common/constants/HTTP_CODE";
 import { OrdonnancementModel } from "common/models/OrdonnancementModel";
+import { get } from "common/services/AxiosService";
+import { env } from "ppenv";
 
 export const getDayToClearDbPPController = async (
   req: Request,
@@ -12,13 +14,23 @@ export const getDayToClearDbPPController = async (
   next: NextFunction
 ) => {
   try {
-    return ApiResponse(
-      res,
-      SUCCESS_CODE_200,
-      true,
-      "Nombre de jour de retention dans la base de données",
-      20
-    );
+    const { result, data } = await get(`${env.getNbJourRetention}`);
+    if (result == "OK") {
+      return ApiResponse(
+        res,
+        SUCCESS_CODE_200,
+        true,
+        "Nombre de jour de retention dans la base de données",
+        data
+      );
+    } else {
+      return ApiResponse(
+        res,
+        SERVER_ERROR_CODE_500,
+        false,
+        "Il y a un problème sur le serveur PlanetPress."
+      );
+    }
   } catch (error) {
     return ApiResponse(
       res,
