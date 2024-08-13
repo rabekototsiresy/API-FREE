@@ -55,7 +55,7 @@ JwtAuth().catch((err) => {
 dbInstance
   .authenticate()
   .then(async () => {
-    await dbInstance.sync({ alter: true });
+    await dbInstance.sync({ alter: false });
     console.log(`► ${config.dbDialect}: connected .....☪☻✔️`);
   })
   .catch((e: any) =>
@@ -65,9 +65,15 @@ dbInstance
 /**
  * route not found
  */
-app.all("/**", (req: Request, res: Response) =>
-  res.status(404).send("Page not found ")
-);
+app.all("/**", (req: Request, res: Response) => {
+  let data: Map<string, number> = new Map<string, number>();
+  data.set("age", 1);
+  data.set("years", 1999);
+  data.set("mount", 1000);
+  console.log(data.get("years"), ": years");
+  console.log(data);
+  res.status(404).send("Page not found ");
+});
 
 /**
  * handle error

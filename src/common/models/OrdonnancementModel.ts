@@ -18,5 +18,8 @@ export const OrdonnancementModel = dbInstance.define("ordonnancement", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  poidsAnnexe: {
+    type: DataTypes.DOUBLE.UNSIGNED,
+    allowNull: false,
+  },
 });
-

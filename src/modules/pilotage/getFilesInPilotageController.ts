@@ -32,7 +32,7 @@ export const getFilesInPilotageController = async (
       // limit: size,
       // offset: page * size
     });
-    return ApiResponse(res, SUCCESS_CODE_200, true, "List of all pilotage", {
+    return ApiResponse(res, SUCCESS_CODE_200, true, "List of file  pilotage", {
       records: filesList.rows,
       count: filesList.count,
     });
