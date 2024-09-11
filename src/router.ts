@@ -2,11 +2,11 @@ import { Router } from "express";
 import { AuthRoute } from "./modules/auth/authRouting";
 import { UserRoute } from "modules/user";
 import { ArticleRouter } from "modules/article";
-import { OrdonnancementRoute } from "modules/parametrage/ordonnacement";
-import { MspRoute } from "modules/msp";
-import { PilotageRoute } from "modules/pilotage";
-import { RazRoute } from "modules/parametrage/raz";
-import { TraitementRoute } from "modules/traitement";
+import { OrdonnancementRoute } from "modules/parametrage/ordonnacement/ordonnancementRouting";
+import { MspRoute } from "modules/msp/mspRouting";
+import { PilotageRoute } from "modules/pilotage/pilotageRouting";
+import { RazRoute } from "modules/parametrage/raz/razRouting";
+import { TraitementRoute } from "modules/traitement/traitementRouting";
 
 export const AppRoute: Router = Router();
 

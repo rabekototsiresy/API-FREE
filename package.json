@@ -5,9 +5,11 @@
   "main": "server.ts",
   "scripts": {
     "start": "node ./dist/server.js",
-    "watch:build": "webpack --watch",
+    "build:dev": "webpack --watch --config webpack.config.js --mode development",
+    "build:prod": "webpack --config webpack.config.js --mode production",
     "watch:server": "nodemon \"./dist/server.js\" --watch \"./dist\"",
-    "dev": "npm-run-all watch:build watch:server"
+    "start:dev": "npm-run-all build:dev watch:server",
+    "start:prod": "node ./dist/server.js"
   },
   "author": "tsiresyrabekoto@gmail.com",
   "license": "ISC",
