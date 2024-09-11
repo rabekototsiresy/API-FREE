@@ -45,7 +45,7 @@ export const updateStatusController = async (
           res,
           SUCCESS_CODE_200,
           true,
-          "Status updated successfully"
+          "Données mises à jour avec succès!"
         );
       } else {
         return ApiResponse(res, SUCCESS_CODE_200, true, "Tout est à jour");
