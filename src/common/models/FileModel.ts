@@ -67,7 +67,7 @@ export const FileModel = dbInstance.define(
       type: DataTypes.STRING,
     },
     status: {
-      type: DataTypes.TINYINT.UNSIGNED, //0: ko,1: ok,2: en cours, 3: Canceled
+      type: DataTypes.TINYINT.UNSIGNED, //0: ko,1: ok,2: en cours, 3: Canceled 4: Traité
     },
     DateFinTraitement: {
       type: DataTypes.DATE,
@@ -78,6 +78,14 @@ export const FileModel = dbInstance.define(
       allowNull: true,
     },
     CodeError: {
+      type: DataTypes.STRING(7),
+      allowNull: true,
+    },
+    Departement: {
+      type: DataTypes.STRING(7),
+      allowNull: true,
+    },
+    Poids: {
       type: DataTypes.STRING(7),
       allowNull: true,
     },

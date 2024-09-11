@@ -10,7 +10,7 @@ import { SERVER_ERROR_CODE_500 } from "./src/common/constants/HTTP_CODE";
 import { JwtAuth } from "./src/common/services/PassportService";
 import { Server } from "socket.io";
 import { createServer } from "http";
-
+import morgan from "morgan";
 // import { errorHandler } from "common/middlewares/responseHandler";
 
 const app = express();
@@ -22,6 +22,7 @@ export const io = new Server(httpServer, {
   },
   maxHttpBufferSize: 1e8,
 });
+app.use(morgan("combined"));
 app.use(helmet());
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
@@ -66,12 +67,6 @@ dbInstance
  * route not found
  */
 app.all("/**", (req: Request, res: Response) => {
-  let data: Map<string, number> = new Map<string, number>();
-  data.set("age", 1);
-  data.set("years", 1999);
-  data.set("mount", 1000);
-  console.log(data.get("years"), ": years");
-  console.log(data);
   res.status(404).send("Page not found ");
 });
 

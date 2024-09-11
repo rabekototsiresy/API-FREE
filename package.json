@@ -39,6 +39,7 @@
     "webpack-node-externals": "^3.0.0"
   },
   "dependencies": {
+    "@types/morgan": "^1.9.9",
     "@types/multer": "^1.4.11",
     "@types/socket.io": "^3.0.2",
     "axios": "^1.6.2",
@@ -52,6 +53,7 @@
     "joi": "^17.9.2",
     "json-2-csv": "^5.5.1",
     "jsonwebtoken": "^9.0.0",
+    "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "mysql2": "^3.3.3",
     "node-pre-gyp": "^0.17.0",
