@@ -57,7 +57,7 @@ dbInstance
   .authenticate()
   .then(async () => {
     await dbInstance.sync({ alter: false });
-    console.log(`► ${config.dbDialect}: connected .....☪☻✔️`);
+    console.log(`► ${config.dbDialect}: connected .....☪☻✔️ `);
   })
   .catch((e: any) =>
     console.log(`${config.dbDialect} : Not connected ️❌️`, e)

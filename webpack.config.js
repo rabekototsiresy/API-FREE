@@ -1,65 +1,64 @@
-const nodeExternals = require('webpack-node-externals');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const NodemonPlugin = require('nodemon-webpack-plugin'); // Ding
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
+const nodeExternals = require("webpack-node-externals");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const NodemonPlugin = require("nodemon-webpack-plugin");
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
+const path = require("path");
+
+// Determine environment (development by default)
+const env = process.env.NODE_ENV || "dev";
 
 const config = {
   context: __dirname,
-  mode: "development",
+  mode: env === "prod" ? "production" : "development", // This sets mode to 'development' or 'production'
   watchOptions: {
-    ignored: 'node_modules/**'
+    ignored: "node_modules/**",
   },
-  stats: 'errors-only',
+  stats: "errors-only",
   entry: "./server.ts",
-  target: 'node', // in order to ignore built-in modules like path, fs, etc.
+  target: "node",
   externals: [nodeExternals()],
   output: {
     filename: "server.js",
-    libraryTarget: 'commonjs'
-
+    libraryTarget: "commonjs",
   },
   resolve: {
-    // Add `.ts` and `.tsx` as a resolvable extension.
     extensions: [".ts", ".tsx", ".js"],
     plugins: [
       new TsconfigPathsPlugin({
-        baseUrl: "./src"
-      })
-    ]
+        baseUrl: "./src",
+      }),
+    ],
   },
   plugins: [
-    new Dotenv(),
-    new NodemonPlugin(), // Dong
-    new UglifyJsPlugin(
-      {
-        uglifyOptions: {
-          mangle: true,
-          output: {
-            comments: false
-          }
+    new Dotenv({
+      path: path.resolve(__dirname, `.env.${env}`), // Load different .env files based on the environment
+    }),
+    new NodemonPlugin(),
+    new UglifyJsPlugin({
+      uglifyOptions: {
+        mangle: true,
+        output: {
+          comments: false,
         },
-        sourceMap: true,
-        exclude: [/\.min\.js$/gi]
-      }
-    ),
+      },
+      sourceMap: true,
+      exclude: [/\.min\.js$/gi],
+    }),
     new CopyWebpackPlugin({
       patterns: [
-        { from: "./.env", to: "." },
+        { from: `./.env.${env}`, to: "." }, // Copy the relevant .env file
         { from: "./package.json", to: "." },
       ],
       options: {
         concurrency: 100,
       },
-    })
+    }),
   ],
   module: {
-    rules: [
-      // all files with a `.ts` or `  .tsx` extension will be handled by `ts-loader`
-      { test: /\.tsx?$/, loader: "ts-loader", exclude: /node_modules/, }
-    ]
-  }
+    rules: [{ test: /\.tsx?$/, loader: "ts-loader", exclude: /node_modules/ }],
+  },
 };
 
 module.exports = config;

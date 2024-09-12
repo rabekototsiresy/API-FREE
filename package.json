@@ -5,10 +5,10 @@
   "main": "server.ts",
   "scripts": {
     "start": "node ./dist/server.js",
-    "build:dev": "webpack --watch --config webpack.config.js --mode development",
-    "build:prod": "webpack --config webpack.config.js --mode production",
+    "build:dev": "cross-env NODE_ENV=dev webpack --watch --config webpack.config.js",
+    "build:prod": "cross-env NODE_ENV=prod webpack --config webpack.config.js ",
     "watch:server": "nodemon \"./dist/server.js\" --watch \"./dist\"",
-    "start:dev": "npm-run-all build:dev watch:server",
+    "start:dev": "npm-run-all  build:dev watch:server",
     "start:prod": "node ./dist/server.js"
   },
   "author": "tsiresyrabekoto@gmail.com",
@@ -26,6 +26,7 @@
     "@types/passport-jwt": "^3.0.8",
     "assert": "^2.0.0",
     "copy-webpack-plugin": "^11.0.0",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.1",
     "dotenv-webpack": "^8.0.1",
     "nodemon": "^2.0.22",
