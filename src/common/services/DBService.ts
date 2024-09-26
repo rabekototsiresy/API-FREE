@@ -13,7 +13,7 @@ export const dbInstance = new Sequelize(connectionUri, {
   dialectOptions: {
     connectTimeout: 60000,
   },
-  logging: console.log, // Enable logging for debugging
+  logging: config.mode === "dev" ? true : false, // Enable logging for debugging
 });
 
 // Construct the connection URI

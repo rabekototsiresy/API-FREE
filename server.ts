@@ -11,6 +11,9 @@ import { JwtAuth } from "./src/common/services/PassportService";
 import { Server } from "socket.io";
 import { createServer } from "http";
 import morgan from "morgan";
+import { MESSAGE } from "./src/common/helpers/utilsHelper";
+export { MESSAGE } from "./src/common/helpers/utilsHelper";
+
 // import { errorHandler } from "common/middlewares/responseHandler";
 
 const app = express();
@@ -56,12 +59,16 @@ JwtAuth().catch((err) => {
 dbInstance
   .authenticate()
   .then(async () => {
-    await dbInstance.sync({ alter: false });
-    console.log(`► ${config.dbDialect}: connected .....☪☻✔️ `);
+    await dbInstance.sync({ alter: true });
+    if (config.mode === "dev") {
+      console.log(`► ${config.dbDialect}: connected .....☪☻✔️ `);
+    }
   })
-  .catch((e: any) =>
-    console.log(`${config.dbDialect} : Not connected ️❌️`, e)
-  );
+  .catch((e: any) => {
+    if (config.mode === "dev") {
+      console.log(`${config.dbDialect} : Not connected ️❌️`, e);
+    }
+  });
 
 /**
  * route not found
@@ -86,6 +93,10 @@ app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
 /**
  * running server
  */
-httpServer.listen(config.port, () => {
-  console.log("Server running on port " + config.port);
+httpServer.listen(config.port, async () => {
+  if (config.mode === "dev") {
+    await MESSAGE("SERVER: OK - PORT: " + config.port);
+  } else {
+    await MESSAGE("WELCOME TO FREE APP");
+  }
 });

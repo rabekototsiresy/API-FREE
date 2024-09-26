@@ -10,4 +10,5 @@ export const env = {
   getPoids: "get_poids_pli",
   refresh_status_processed: "refresh_status_processed",
   manualProcess: "manual_process",
+  getSettingsTable: "get_setting_table",
 };
