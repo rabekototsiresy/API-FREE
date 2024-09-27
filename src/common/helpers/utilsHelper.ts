@@ -1,6 +1,5 @@
 import path from "path";
 import fs from "fs";
-import figlet from "figlet";
 export const mmToPx = (px: any) => {
   return px * 0.2645833333;
 };
@@ -29,18 +28,6 @@ export const saveFile = (filePath: string, fileBuffer: any) => {
       } else {
         resolve(filePath);
       }
-    });
-  });
-};
-
-export const MESSAGE = (text: string) => {
-  return new Promise((resolve, reject) => {
-    figlet(text, function (err, data) {
-      if (err) {
-        reject(err);
-      }
-      console.log(data);
-      resolve(data);
     });
   });
 };

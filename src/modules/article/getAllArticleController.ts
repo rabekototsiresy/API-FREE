@@ -4,9 +4,8 @@ import {
   SERVER_ERROR_CODE_500,
   SUCCESS_CODE_200,
 } from "common/constants/HTTP_CODE";
-import { ArticleConfigModel } from "../../common/models/ArticleConfigModel";
 import { get } from "common/services/AxiosService";
-import { env } from "process";
+import { env } from "../../ppenv";
 
 export const getAllArticleController = async (
   req: Request,

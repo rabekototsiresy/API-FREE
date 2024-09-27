@@ -7,14 +7,12 @@ import { deleteUserController } from "./deleteUserController";
 import { updateUserController } from "./updateUserController";
 import { registerController } from "modules/auth/controllers/registerController";
 
-
 export const UserRoute: Router = Router();
 
 UserRoute.route("").get(
   passport.authenticate("jwt", { session: false }),
   getUserController
 );
-
 
 UserRoute.route("").post(
   passport.authenticate("jwt", { session: false }),
@@ -32,4 +30,3 @@ UserRoute.route("/:id").delete(
   passport.authenticate("jwt", { session: false }),
   deleteUserController
 );
-

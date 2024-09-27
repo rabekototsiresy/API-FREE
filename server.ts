@@ -11,8 +11,6 @@ import { JwtAuth } from "./src/common/services/PassportService";
 import { Server } from "socket.io";
 import { createServer } from "http";
 import morgan from "morgan";
-import { MESSAGE } from "./src/common/helpers/utilsHelper";
-export { MESSAGE } from "./src/common/helpers/utilsHelper";
 
 // import { errorHandler } from "common/middlewares/responseHandler";
 
@@ -59,7 +57,7 @@ JwtAuth().catch((err) => {
 dbInstance
   .authenticate()
   .then(async () => {
-    await dbInstance.sync({ alter: true });
+    await dbInstance.sync({ alter: false });
     if (config.mode === "dev") {
       console.log(`► ${config.dbDialect}: connected .....☪☻✔️ `);
     }
@@ -95,8 +93,8 @@ app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
  */
 httpServer.listen(config.port, async () => {
   if (config.mode === "dev") {
-    await MESSAGE("SERVER: OK - PORT: " + config.port);
+    console.log("SERVER: OK - PORT: " + config.port);
   } else {
-    await MESSAGE("WELCOME TO FREE APP");
+    console.log("WELCOME TO FREE APP");
   }
 });
