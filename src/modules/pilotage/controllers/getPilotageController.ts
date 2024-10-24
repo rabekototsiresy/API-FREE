@@ -32,7 +32,6 @@ export const getPilotageController = async (
             status: pilotagegFileListFromPP[i].isOK ? 1 : 0,
           };
           const pilotage: any = await PilotageModel.create(pilotagePayload);
-          console.log(pilotage, "---", pilotage.id);
           const fileList = pilotagegFileListFromPP[i].listeFichier.map(
             (file: any) => ({ ...file, pilotageId: pilotage.id, status: 2 }) //0: ko, 1: ok, 2: en cours
           );

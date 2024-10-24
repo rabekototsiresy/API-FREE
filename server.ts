@@ -12,7 +12,7 @@ import { Server } from "socket.io";
 import { createServer } from "http";
 import morgan from "morgan";
 
-// import { errorHandler } from "common/middlewares/responseHandler";
+import { scheduleOldDataDeletion } from "./src/common/helpers/utilsHelper";
 
 const app = express();
 const httpServer = createServer(app);
@@ -92,6 +92,7 @@ app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
  * running server
  */
 httpServer.listen(config.port, async () => {
+  scheduleOldDataDeletion();
   if (config.mode === "dev") {
     console.log("SERVER: OK - PORT: " + config.port);
   } else {

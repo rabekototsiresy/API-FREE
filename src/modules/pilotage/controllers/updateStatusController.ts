@@ -50,6 +50,8 @@ export const updateStatusController = async (
       } else {
         return ApiResponse(res, SUCCESS_CODE_200, true, "Tout est à jour");
       }
+    } else {
+      return ApiResponse(res, SERVER_ERROR_CODE_500, false, message);
     }
   } catch (error) {
     console.log(error, "error");
