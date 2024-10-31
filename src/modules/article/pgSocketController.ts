@@ -10,6 +10,7 @@ export const pgSocketController = async (socket: Socket, body: any) => {
     const historique: any = await HistoriquePGModel.create({
       dateSoumission: new Date(),
       nombrePg: body.quantite,
+      article: body.Libelle,
     });
     const { result, message } = (await post(
       `${env.generatePg}`,

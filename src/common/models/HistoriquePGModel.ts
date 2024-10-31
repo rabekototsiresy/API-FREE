@@ -16,4 +16,5 @@ export const HistoriquePGModel = dbInstance.define("historiquePg", {
     allowNull: true,
   },
   nombrePg: DataTypes.INTEGER,
+  article: DataTypes.STRING,
 });
