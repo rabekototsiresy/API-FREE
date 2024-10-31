@@ -58,7 +58,7 @@ JwtAuth().catch((err) => {
 dbInstance
   .authenticate()
   .then(async () => {
-    await dbInstance.sync({ alter: false });
+    await dbInstance.sync({ alter: true });
     if (config.mode === "dev") {
       console.log(`► ${config.dbDialect}: connected .....☪☻✔️ `);
     }

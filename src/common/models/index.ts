@@ -3,3 +3,4 @@ export * from "./UserModel";
 export * from "./OrdonnancementModel";
 export * from "./FileModel";
 export * from "./PilotageModel";
+export * from "./HistoriquePGModel";
