@@ -26,7 +26,7 @@ ArticleRouter.route("/pli-generique").post(
   validate(pliGeneriqueSchema),
   pliGeneriqueController
 );
-ArticleRouter.route("/historique-pg").post(
+ArticleRouter.route("/historique-pg").get(
   passport.authenticate("jwt", { session: false }),
   validate(pliGeneriqueSchema),
   pliGeneriqueController
