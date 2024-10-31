@@ -13,6 +13,7 @@ import { createServer } from "http";
 import morgan from "morgan";
 
 import { scheduleOldDataDeletion } from "./src/common/helpers/utilsHelper";
+import { pgSocketController } from "./src/modules/article/pgSocketController";
 
 const app = express();
 const httpServer = createServer(app);
@@ -87,6 +88,19 @@ app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
     "Oops something went wrong:" + err
   );
 });
+
+/**
+ * SOCKET
+ */
+
+io.on("connection", (socket) => {
+  socket.on("on_pg_start", async (body) => {
+    await pgSocketController(socket, body);
+  });
+});
+/**
+ * END SOCKET
+ */
 // app.use(errorHandler);
 /**
  * running server
