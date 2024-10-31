@@ -6,6 +6,7 @@ import { updateArticleController } from "./updateArticleController";
 import { moveCsvToDirControoller } from "./moveCsvToDirControoller";
 import { pliGeneriqueSchema } from "common/schemas/PGSchema";
 import { pliGeneriqueController } from "./pliGeneriqueController";
+import { getHistoriquePGController } from "./getHistoriquePGController";
 
 export const ArticleRouter: Router = Router();
 ArticleRouter.route("").get(
@@ -28,6 +29,5 @@ ArticleRouter.route("/pli-generique").post(
 );
 ArticleRouter.route("/historique-pg").get(
   passport.authenticate("jwt", { session: false }),
-  validate(pliGeneriqueSchema),
-  pliGeneriqueController
+  getHistoriquePGController
 );
