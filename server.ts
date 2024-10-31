@@ -94,7 +94,7 @@ app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
  */
 
 io.on("connection", (socket) => {
-  socket.on("on_pg_start", async (body) => {
+  socket.on("on_pg_pending", async (body) => {
     await pgSocketController(socket, body);
   });
 });
