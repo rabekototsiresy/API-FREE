@@ -30,6 +30,9 @@ export const getPilotageController = async (
           const pilotagePayload = {
             filename: pilotagegFileListFromPP[i].filename,
             status: pilotagegFileListFromPP[i].isOK ? 1 : 0,
+            nombrePli: pilotagegFileListFromPP[i].isOK
+              ? pilotagegFileListFromPP[i].listeFichier.length
+              : 0,
           };
           const pilotage: any = await PilotageModel.create(pilotagePayload);
           const fileList = pilotagegFileListFromPP[i].listeFichier.map(
@@ -39,7 +42,7 @@ export const getPilotageController = async (
         }
 
         const pilotageList = await PilotageModel.findAndCountAll({
-          attributes: ["id", "filename", "status", "createdAt"],
+          attributes: ["id", "filename", "status", "nombrePli", "createdAt"],
           order: [["createdAt", "DESC"]],
           // where: whereClause,
           // limit: size,
@@ -57,7 +60,7 @@ export const getPilotageController = async (
         );
       } else {
         const pilotageList = await PilotageModel.findAndCountAll({
-          attributes: ["id", "filename", "status", "createdAt"],
+          attributes: ["id", "filename", "status", "nombrePli", "createdAt"],
           order: [["createdAt", "DESC"]],
           // where: whereClause,
           // limit: size,

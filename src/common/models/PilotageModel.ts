@@ -1,6 +1,6 @@
 import { dbInstance } from "common/services/DBService";
 import { DataTypes } from "sequelize";
-import {FileModel} from "./FileModel";
+import { FileModel } from "./FileModel";
 export const PilotageModel = dbInstance.define("pilotage", {
   id: {
     type: DataTypes.INTEGER,
@@ -15,6 +15,7 @@ export const PilotageModel = dbInstance.define("pilotage", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  nombrePli: DataTypes.INTEGER,
 });
 
 PilotageModel.hasMany(FileModel);
