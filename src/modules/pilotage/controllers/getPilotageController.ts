@@ -12,6 +12,7 @@ import { FileModel } from "common/models/FileModel";
 import { Op } from "sequelize";
 import { PPResponse } from "common/interfaces/PPResponse";
 import { IPilotage } from "common/interfaces/IPilotage";
+import { EStatus } from "common/enums/EStatus";
 
 export const getPilotageController = async (
   req: Request,
@@ -36,7 +37,11 @@ export const getPilotageController = async (
           };
           const pilotage: any = await PilotageModel.create(pilotagePayload);
           const fileList = pilotagegFileListFromPP[i].listeFichier.map(
-            (file: any) => ({ ...file, pilotageId: pilotage.id, status: 2 }) //0: ko, 1: ok, 2: en cours
+            (file: any) => ({
+              ...file,
+              pilotageId: pilotage.id,
+              status: EStatus.PENDING,
+            }) //0: ko, 1: ok, 2: en cours
           );
           await FileModel.bulkCreate(fileList);
         }

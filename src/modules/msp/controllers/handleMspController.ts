@@ -8,6 +8,7 @@ import { post } from "../../../common/services/AxiosService";
 import { env } from "../../../ppenv";
 
 import { FileModel } from "common/models/FileModel";
+import { EStatus } from "common/enums/EStatus";
 enum eAction {
   print,
   cancel,
@@ -24,7 +25,7 @@ export const handleMspController = async (
     if (result == "OK") {
       let currentPilotage =
         type === eAction.cancel ? pilotages : reprindIProdList;
-      let status = type === eAction.cancel ? 3 : 2;
+      let status = type === eAction.cancel ? EStatus.CANCELED : EStatus.TRAITED;
       for (let index = 0; index < currentPilotage.length; index++) {
         await FileModel.update(
           { status },

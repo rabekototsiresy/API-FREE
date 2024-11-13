@@ -90,7 +90,5 @@ export const FileModel = dbInstance.define(
       allowNull: true,
     },
   },
-  {
-    // Additional options (timestamps, tableName, etc.) can be added here
-  }
+  {}
 );

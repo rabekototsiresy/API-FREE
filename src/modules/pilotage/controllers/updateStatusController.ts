@@ -9,6 +9,7 @@ import { env } from "../../../ppenv";
 import { PPResponse } from "common/interfaces/PPResponse";
 import { IPilotage, IRetourMSP } from "common/interfaces/IPilotage";
 import { FileModel } from "common/models";
+import { EStatus } from "common/enums/EStatus";
 
 export const updateStatusController = async (
   req: Request,
@@ -32,7 +33,7 @@ export const updateStatusController = async (
           if (type === "msp") {
             where = { IdProd };
           } else if (type === "manuel") {
-            where = { IdProd, status: 2 };
+            where = { IdProd, status: EStatus.PENDING };
           }
           await FileModel.update(
             { status: Number(file.Statut) },
