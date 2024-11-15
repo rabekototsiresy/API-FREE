@@ -16,7 +16,6 @@ export const getFilesInPilotageController = async (
     const { id } = req.params;
     const pageAsNumber = Number.parseInt((req.query as any).page);
     const sizeAsNumber = Number.parseInt((req.query as any).size);
-
     let page = 0;
 
     if (!Number.isNaN(pageAsNumber) && pageAsNumber > 0) {
