@@ -9,56 +9,44 @@ import { env } from "../../../ppenv";
 
 import { FileModel } from "common/models/FileModel";
 import { EStatus } from "common/enums/EStatus";
+import { Socket } from "socket.io";
 enum eAction {
   print,
   cancel,
 }
-export const handleMspController = async (
-  req: Request,
-  res: Response,
-  _next: NextFunction
-) => {
+
+export const handleMspController = async (socket: Socket, body: any) => {
   try {
-    const { type, idProdList: pilotages } = req.body;
+    const { type, idProdList: pilotages } = body;
+    socket.emit(
+      "on_rmsp_pending",
+      `${
+        type === eAction.cancel ? "Annulation" : "Re-impression"
+      }   en cours ...`
+    );
     const path = type === eAction.cancel ? env.cancelMsp : env.printMsp;
-    const { result, data: reprindIProdList } = await post(`${path}`, pilotages);
+    let currentPilotage = type === eAction.cancel ? pilotages : pilotages;
+    let status = type === eAction.cancel ? EStatus.CANCELED : EStatus.TRAITED;
+    for (let index = 0; index < currentPilotage.length; index++) {
+      await FileModel.update(
+        { status },
+        {
+          where: { IdProd: currentPilotage[index] },
+        }
+      );
+    }
+    const { result } = await post(`${path}`, pilotages);
     if (result == "OK") {
-      let currentPilotage =
-        type === eAction.cancel ? pilotages : reprindIProdList;
-      let status = type === eAction.cancel ? EStatus.CANCELED : EStatus.TRAITED;
-      for (let index = 0; index < currentPilotage.length; index++) {
-        await FileModel.update(
-          { status },
-          {
-            where: { IdProd: currentPilotage[index] },
-          }
-        );
-      }
       const message =
         type === eAction.cancel ? "Canceled successfully" : "Print pending";
-      return ApiResponse(res, SUCCESS_CODE_200, true, message);
+      socket.emit("on_rmsp_success", message);
     } else {
-      return ApiResponse(
-        res,
-        SERVER_ERROR_CODE_500,
-        false,
+      socket.emit(
+        "on_rmsp_error",
         "Il y a un problème sur le serveur PlanetPress."
       );
     }
   } catch (error) {
-    return ApiResponse(
-      res,
-      SERVER_ERROR_CODE_500,
-      false,
-      "Oops something went wrong"
-    );
+    socket.emit("on_rmsp_error", "Oops something went wrong");
   }
 };
-
-// 66 Longeur
-
-// 21m zanot
-
-// 45m pasy
-
-// taraka tamin'ny tao

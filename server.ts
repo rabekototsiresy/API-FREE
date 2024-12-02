@@ -1,3 +1,4 @@
+import { handleMspController } from "./src/modules/msp/controllers/handleMspController";
 import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -96,6 +97,9 @@ app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
 io.on("connection", (socket) => {
   socket.on("on_pg_pending", async (body) => {
     await pgSocketController(socket, body);
+  });
+  socket.on("on_rmsp_pending", async (body) => {
+    await handleMspController(socket, body);
   });
 });
 /**
