@@ -35,6 +35,7 @@ export const handleMspController = async (socket: Socket, body: any) => {
         }
       );
     }
+    socket.emit("on_db_updated");
     const { result } = await post(`${path}`, pilotages);
     if (result == "OK") {
       const message =
