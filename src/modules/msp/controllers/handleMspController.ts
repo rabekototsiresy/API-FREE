@@ -39,7 +39,9 @@ export const handleMspController = async (socket: Socket, body: any) => {
     const { result } = await post(`${path}`, pilotages);
     if (result == "OK") {
       const message =
-        type === eAction.cancel ? "Canceled successfully" : "Print pending";
+        type === eAction.cancel
+          ? "Annulation terminée avec succès"
+          : "Réimpression terminée avec succès ";
       socket.emit("on_rmsp_success", message);
     } else {
       socket.emit(
