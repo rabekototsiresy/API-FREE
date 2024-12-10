@@ -7,3 +7,4 @@ export const CONFLICT_CODE_409 = 409;
 export const UNAUTHORIZED_CODE_401 = 401;
 export const FORBIDDEN_CODE_403 = 403;
 export const NO_CONTENT_204 = 204;
+export const BAD_REQUEST_400 = 400;

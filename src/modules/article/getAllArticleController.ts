@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { ApiResponse } from "common/helpers/ApiResponse";
 import {
+  BAD_REQUEST_400,
   SERVER_ERROR_CODE_500,
   SUCCESS_CODE_200,
 } from "common/constants/HTTP_CODE";
@@ -15,16 +16,14 @@ export const getAllArticleController = async (
   try {
     const { result, data, message } = await get(`${env.getSettingsTable}`);
     let msg = "";
-    let status = true;
+    let success = true;
     if (result == "OK") {
-      msg = "Liste table de paramètrage";
+      msg = "List of all articles";
     } else {
       msg = message;
-      status = false;
+      success = false;
     }
-    return ApiResponse(res, SUCCESS_CODE_200, status, msg, data);
-    // const articlesList = await ArticleConfigModel.findAll();
-    // return ApiResponse(res,SUCCESS_CODE_200,true,"List of all articles",articlesList);
+    return ApiResponse(res, SUCCESS_CODE_200, success, msg, data);
   } catch (error) {
     return ApiResponse(
       res,
