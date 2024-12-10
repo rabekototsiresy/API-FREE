@@ -14,17 +14,15 @@ export const getAllArticleController = async (
 ) => {
   try {
     const { result, data, message } = await get(`${env.getSettingsTable}`);
+    let msg = "";
+    let status = true;
     if (result == "OK") {
-      return ApiResponse(
-        res,
-        SUCCESS_CODE_200,
-        true,
-        "Liste table de paramètrage",
-        data
-      );
+      msg = "Liste table de paramètrage";
     } else {
-      return ApiResponse(res, SERVER_ERROR_CODE_500, false, message);
+      msg = message;
+      status = false;
     }
+    return ApiResponse(res, SUCCESS_CODE_200, status, msg, data);
     // const articlesList = await ArticleConfigModel.findAll();
     // return ApiResponse(res,SUCCESS_CODE_200,true,"List of all articles",articlesList);
   } catch (error) {
