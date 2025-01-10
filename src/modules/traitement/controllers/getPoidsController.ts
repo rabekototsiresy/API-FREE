@@ -11,7 +11,7 @@ import { env } from "ppenv";
 import { Op, Sequelize } from "sequelize";
 
 export const getPoidsController = async (
-  req: Request,
+  req: Request | any,
   res: Response,
   _next: NextFunction
 ) => {
@@ -19,6 +19,7 @@ export const getPoidsController = async (
     const { typeProd } = req.query;
 
     const { data: weightsList, result, message } = await get(`${env.getPoids}`);
+    req.apiResponse = { ppResponse: weightsList };
 
     if (result == "OK") {
       if (weightsList.length > 0) {

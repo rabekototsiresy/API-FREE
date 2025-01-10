@@ -11,13 +11,15 @@ import { FileModel } from "common/models/FileModel";
 import { Op } from "sequelize";
 
 export const razController = async (
-  req: Request,
+  req: Request | any,
   res: Response,
   next: NextFunction
 ) => {
   try {
     const response = await get(`${env.raz}`);
-    const { result } = response as PPResponse;
+    const { result, message } = response as PPResponse;
+    req.apiResponse = { ppResponse: result };
+
     if (result == "OK") {
       await FileModel.update(
         { status: 3 },
@@ -30,12 +32,7 @@ export const razController = async (
           },
         }
       );
-      return ApiResponse(
-        res,
-        SUCCESS_CODE_200,
-        true,
-        "Reset successfully completed."
-      );
+      return ApiResponse(res, SUCCESS_CODE_200, true, message);
     } else
       return ApiResponse(
         res,

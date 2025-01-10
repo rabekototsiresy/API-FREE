@@ -9,12 +9,14 @@ import { get } from "common/services/AxiosService";
 import { env } from "ppenv";
 
 export const getDayToClearDbPPController = async (
-  req: Request,
+  req: Request | any,
   res: Response,
   next: NextFunction
 ) => {
   try {
     const { result, data } = await get(`${env.getNbJourRetention}`);
+    req.apiResponse = { ppResponse: result };
+
     if (result == "OK") {
       return ApiResponse(
         res,

@@ -9,12 +9,13 @@ import { get } from "common/services/AxiosService";
 import { env } from "../../ppenv";
 
 export const getAllArticleController = async (
-  req: Request,
+  req: Request | any,
   res: Response,
   next: NextFunction
 ) => {
   try {
     const { result, data, message } = await get(`${env.getSettingsTable}`);
+    req.apiResponse = { ppResponse: data };
     let msg = "";
     let success = true;
     if (result == "OK") {

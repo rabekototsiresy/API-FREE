@@ -10,7 +10,7 @@ import { get, post } from "common/services/AxiosService";
 import { PPResponse } from "common/interfaces/PPResponse";
 
 export const pliGeneriqueController = async (
-  req: Request,
+  req: Request | any,
   res: Response,
   _next: NextFunction
 ) => {
@@ -21,6 +21,8 @@ export const pliGeneriqueController = async (
       `${env.generatePg}`,
       body
     )) as PPResponse;
+    req.apiResponse = { ppResponse: result };
+
     if (result === "OK") {
       return ApiResponse(
         res,

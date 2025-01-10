@@ -15,6 +15,7 @@ import morgan from "morgan";
 
 import { scheduleOldDataDeletion } from "./src/common/helpers/utilsHelper";
 import { pgSocketController } from "./src/modules/article/pgSocketController";
+import axios from "axios";
 
 const app = express();
 const httpServer = createServer(app);
@@ -25,12 +26,27 @@ export const io = new Server(httpServer, {
   },
   maxHttpBufferSize: 1e8,
 });
-app.use(morgan("combined"));
+// app.use(morgan("combined"));
 app.use(helmet());
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
 app.use(express.static("uploads"));
+morgan.token("date", () => {
+  return new Date().toISOString(); // Retourne une date ISO 8601 (exemple : 2025-01-10T12:34:56.789Z)
+});
+
+// Jeton pour inclure le corps de la requête
+morgan.token("api-response", (req: any) => {
+  return req.apiResponse ? JSON.stringify(req.apiResponse) : "-";
+});
+
+// Configuration de morgan avec les jetons personnalisés
+app.use(
+  morgan(
+    ":date :method :url :status :res[content-length] - :response-time ms - PP Response: :api-response"
+  )
+);
 
 /**
  * app oute

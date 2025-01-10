@@ -28,12 +28,19 @@ export const getPilotageController = async (
     if (result == "OK") {
       if (pilotagegFileListFromPP && pilotagegFileListFromPP.length !== 0) {
         for (let i = 0; i < pilotagegFileListFromPP.length; i++) {
+          const dateObject = new Date(pilotagegFileListFromPP[i].date);
+
+          const dateReception = dateObject
+            .toISOString()
+            .slice(0, 19)
+            .replace("T", " ");
           const pilotagePayload = {
             filename: pilotagegFileListFromPP[i].filename,
             status: pilotagegFileListFromPP[i].isOK ? 1 : 0,
             nombrePli: pilotagegFileListFromPP[i].isOK
               ? pilotagegFileListFromPP[i].listeFichier.length
               : 0,
+            createdAt: dateReception,
           };
           const pilotage: any = await PilotageModel.create(pilotagePayload);
           const fileList = pilotagegFileListFromPP[i].listeFichier.map(

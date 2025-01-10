@@ -8,13 +8,15 @@ import { post } from "common/services/AxiosService";
 import { env } from "ppenv";
 
 export const runProcessController = async (
-  req: Request,
+  req: Request | any,
   res: Response,
   next: NextFunction
 ) => {
   try {
     const body = req.body;
     const { result, data } = await post(`${env.manualProcess}`, body);
+    req.apiResponse = { ppResponse: data };
+
     if (result == "OK") {
       return ApiResponse(
         res,

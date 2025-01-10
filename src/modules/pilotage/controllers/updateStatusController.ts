@@ -12,7 +12,7 @@ import { FileModel } from "common/models";
 import { EStatus } from "common/enums/EStatus";
 
 export const updateStatusController = async (
-  req: Request,
+  req: Request | any,
   res: Response,
   _next: NextFunction
 ) => {
@@ -25,6 +25,8 @@ export const updateStatusController = async (
     const response = await get(`${route}`);
     const { data, result, message } = response as PPResponse;
     const mspList = data as IRetourMSP[];
+    req.apiResponse = { ppResponse: mspList };
+
     if (result == "OK") {
       if (mspList && mspList.length !== 0) {
         for (const file of mspList) {
